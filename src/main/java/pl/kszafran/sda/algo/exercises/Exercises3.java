@@ -25,7 +25,7 @@ public class Exercises3 {
             result.add(directory);
         }
 
-        if (files != null) {//do ogarniecia
+        if (files != null) {
 
             for (File file : files) {
 
