@@ -7,15 +7,18 @@
     <groupId>pl.kszafran.sda</groupId>
     <artifactId>programming1</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>25.0-jre</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.1.0</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -28,5 +31,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -1,5 +1,6 @@
 package pl.kszafran.sda.algo.exercises;
 
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -11,22 +12,37 @@ public class Exercises1 {
      * Oblicza silnię argumentu n. Zwraca 1 dla n = 0.
      */
     public int factorial(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (n==0){
+            return 1;
+        }
+        return n*factorial(n-1);
     }
-
     /**
      * Oblicza sumę wszystkich liczb w podanej tablicy.
      * Uwaga: aby policzyć sumę rekurencyjnie, potrzebna będzie dodatkowa metoda.
      */
+    public int sum3(int[] n){
+        return n[0] + sum3(Arrays.copyOfRange(n, 1, n.length));
+    }
+
     public int sum(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return sum2(numbers,0);
+    }
+
+    public int sum2(int[] numbers,int offset){
+       if (offset==numbers.length){
+           return 0;
+       }else {
+           return numbers[offset]+sum2(numbers,offset+1);
+       }
     }
 
     /**
      * Odwraca podany napis, np. dla "test" zwraca "tset".
      */
     public String reverse(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int length = text.length();
+        return text.substring(text.charAt(length),text.charAt(length-1));
     }
 
     /**
