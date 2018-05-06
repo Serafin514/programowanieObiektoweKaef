@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static java.util.Comparator.comparing;
 
 
 public class Solutions3 extends Exercises3 {
@@ -132,9 +133,6 @@ public class Solutions3 extends Exercises3 {
         return value == array[low] ? low : -1;
     }
 
-    private enum Boundary {
-        START, END
-
     public List<File> findFiles(File directory, String regex) throws IOException {
         if (directory.isFile()) {
             return directory.getName().matches(regex) ? singletonList(directory) : emptyList();
@@ -157,7 +155,7 @@ public class Solutions3 extends Exercises3 {
         return found;
     }
 
-    @Override
+
     public Stream<Path> findFilesNIO(Path directory, Pattern regex) throws IOException {
         if (!Files.exists(directory)) {
             return Stream.empty();
@@ -166,5 +164,8 @@ public class Solutions3 extends Exercises3 {
                 .filter(path -> regex.matcher(path.getFileName().toString()).matches())
                 .sorted();
     }
+    private enum Boundary {
+        START, END
     }
 }
+
