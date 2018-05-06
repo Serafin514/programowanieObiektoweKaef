@@ -1,7 +1,7 @@
 package pl.kszafran.sda.algo.exercises;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Zaimplementuj poniższe metody operujące na liście wiązanej jednokierunkowej.
@@ -21,6 +21,7 @@ public class Exercises4 {
          * Zwraca true jeśli lista jest pusta.
          */
         boolean isEmpty();
+
 
         /**
          * Zwraca rozmiar listy (ilość elementów).
@@ -116,47 +117,85 @@ public class Exercises4 {
         private Node<T> head;
 
         public SdaLinkedList(T[] elements) {
-            throw new UnsupportedOperationException("Not implemented yet");
+
+            for (int i = elements.length - 1; i >= 0; i--) {
+                head = new Node<>(elements[i], head);
+            }
         }
 
         @Override
         public boolean isEmpty() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (head == null) {
+                return true;
+            }
+            return false;
         }
 
         @Override
         public int size() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            Node<T> iteratorNext = head;
+            int iterator = 0;
+            while (null != iteratorNext) {
+                iteratorNext = iteratorNext.next;
+                iterator++;
+            }
+            return iterator;
         }
 
         @Override
         public T getFirst() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (head != null) {
+                return head.element;
+            }
+            throw new NoSuchElementException("bla getFirst");
         }
 
         @Override
         public T getLast() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            Node<T> iteratorNext = head;
+            if (head != null) {
+                while (null != iteratorNext.next) {
+                    iteratorNext = iteratorNext.next;
+                }
+                return iteratorNext.element;
+            } else
+                throw new NoSuchElementException("bla get last");
         }
 
         @Override
         public T get(int index) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            int iterator = 0;
+            Node<T> iteratorNext = head;
+
+            if (head != null) {
+                if (index >= 0) {
+                    while (iterator < index) {
+
+                        iteratorNext = iteratorNext.next;
+                        if (iteratorNext==null){
+                            throw new IndexOutOfBoundsException(index);
+                        }
+                        iterator++;
+                    }
+                    return iteratorNext.element;
+                }
+            }
+            throw new IndexOutOfBoundsException(index);
         }
 
         @Override
         public void clear() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            head = null;
         }
 
         @Override
         public void addFirst(T element) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            Node<T> addFirstHead = new Node<>(element, head);
         }
 
         @Override
         public void addLast(T element) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            
         }
 
         @Override
@@ -197,8 +236,8 @@ public class Exercises4 {
 
         private static class Node<T> {
 
-            private final T element;
-            private final Node<T> next;
+            private T element;
+            private Node<T> next;
 
             private Node(T element, Node<T> next) {
                 this.element = element;
