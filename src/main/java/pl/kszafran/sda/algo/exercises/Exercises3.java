@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-
 /**
  * Zaimplementuj poniższe algorytmy wyszukiwania.
  */
@@ -22,7 +21,12 @@ public class Exercises3 {
      * Zwraca -1 jeśli element nie znajduje się w tablicy.
      */
     public int linearSearch(int[] array, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == value) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -30,16 +34,31 @@ public class Exercises3 {
      * Zwraca -1 jeśli element nie znajduje się w tablicy.
      */
     public int binarySearch(int[] array, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int minValue = 0;
+        int maxValue = array.length - 1;
+        while (maxValue >= minValue) {
+            int middleValue = ((maxValue + minValue) / 2);
+            if (array[middleValue] > value) {
+                maxValue = middleValue - 1;
+            } else if (array[middleValue] < value) {
+                minValue = middleValue + 1;
+            } else
+                return middleValue;
+        }
+        return -1;
     }
 
     /**
      * Wyszukuje element o wartości value w podanej POSORTOWANEJ liście i zwraca jego indeks.
      */
     public <T> Optional<Integer> indexOf(List<T> list, T value, Comparator<T> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (int i = 0; i < list.size(); i++) {
+            if (value == list.get(i)) {
+                return Optional.ofNullable(i);
+            }
+        }
+        return Optional.empty();
     }
-
     ////////////////////////////////////////////
     //                                        //
     // PONIŻEJ ZADANIA DODATKOWE DLA CHĘTNYCH //

@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Exercises3Test {
 
+
     private Exercises3 exercises = new Exercises3();
 
     @Test
