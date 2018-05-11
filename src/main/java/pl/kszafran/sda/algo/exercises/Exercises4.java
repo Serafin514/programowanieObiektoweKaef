@@ -172,7 +172,7 @@ public class Exercises4 {
                     while (iterator < index) {
 
                         iteratorNext = iteratorNext.next;
-                        if (iteratorNext==null){
+                        if (iteratorNext == null) {
                             throw new IndexOutOfBoundsException(index);
                         }
                         iterator++;
@@ -190,17 +190,25 @@ public class Exercises4 {
 
         @Override
         public void addFirst(T element) {
-            Node<T> addFirstHead = new Node<>(element, head);
+            head = new Node<>(element, head);
         }
 
         @Override
         public void addLast(T element) {
-            
+            if (isEmpty()) {
+                addFirst(element);
+            } else {
+                Node zmienna = head;
+                while (zmienna.next != null) {
+                    zmienna = zmienna.next;
+                }
+                zmienna.next = new Node<>(element,null);
+            }
         }
 
         @Override
         public void removeFirst() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            head = null;
         }
 
         @Override
@@ -246,3 +254,20 @@ public class Exercises4 {
         }
     }
 }
+/*
+            if (head == null) {
+                addFirst(element);
+                //throw new IndexOutOfBoundsException();
+                if(isEmpty())
+                {
+                    throw new NoSuchElementException();
+
+                }
+            }
+            Node nd = head;
+            while (nd.next != null) {
+                nd = nd.next;
+
+            }
+            nd.next = new Node(element, null);
+            */

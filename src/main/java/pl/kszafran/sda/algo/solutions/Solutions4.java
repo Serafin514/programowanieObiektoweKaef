@@ -100,6 +100,7 @@ public class Solutions4 extends Exercises4 {
                 last = last.next;
             }
             prev.next = null;
+            prev.next = null;
         }
 
         @Override
