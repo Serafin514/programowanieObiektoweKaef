@@ -127,9 +127,23 @@ public class Exercises6 {
      * Funkcja zwraca liczbę liści w podanym drzewie.
      */
     public int countLeaves(SdaTree<?> tree) {
-        int itelator;
+        int iterator = 0;
+        Deque<SdaTree<?>> deque = new ArrayDeque<>();
+        deque.push(tree);
+        while (!deque.isEmpty()) {
+            SdaTree<?> temp = deque.pop();
 
-        throw new UnsupportedOperationException("Not implemented yet");
+            if (temp.getRightChild().isPresent()) {
+                deque.push(temp.getRightChild().get());
+            }
+            if (temp.getLeftChild().isPresent()) {
+                deque.push(temp.getLeftChild().get());
+            }
+            if (!temp.getLeftChild().isPresent() && !temp.getRightChild().isPresent()) {
+                iterator++;
+            }
+        }
+        return iterator;
     }
 
     /**
@@ -183,6 +197,8 @@ public class Exercises6 {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
+
+    
     /**
      * Funkcja oblicza wysokość drzewa.
      * <p>
