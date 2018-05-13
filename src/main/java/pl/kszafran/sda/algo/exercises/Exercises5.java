@@ -155,22 +155,22 @@ public class Exercises5 {
 
 
         private T[] elements;
+        private int firstElement;
         private int size;
 
 
         public SdaCircularBuffer(int capacity, T[] elements) {
-            this.elements = elements;
+            this.elements = Arrays.copyOf(elements, capacity);
             size = elements.length;
 
             if (elements.length > capacity) {
                 throw new IllegalArgumentException();
             }
-            T[] newArrays = Arrays.copyOf(elements, capacity);
         }
 
         @Override
         public boolean isEmpty() {
-            return elements.length == 0;
+            return size == 0;
         }
 
         @Override
@@ -185,18 +185,33 @@ public class Exercises5 {
 
         @Override
         public T peek() {
-            //return elements[size];
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            return elements[firstElement];
         }
 
         @Override
         public T dequeue() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            T element = elements[firstElement];
+            elements[firstElement] = null;
+            firstElement++;
+            firstElement = firstElement % elements.length;
+            size--;
+            return element;
         }
 
         @Override
         public void enqueue(T element) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (isFull()) {
+                throw new IllegalStateException();
+            }
+            elements[(firstElement + size) % elements.length] = element;
+            size++;
+
         }
     }
 
@@ -215,7 +230,18 @@ public class Exercises5 {
      * Podpowiedź: pytać o podpowiedzi :)
      */
     public <T> void reverseStack(Deque<T> stack) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (!stack.isEmpty()){
+            T element = stack.pop();
+            reverseStack(stack);
+            pushToBottom(stack, element);
+        }
+
+
+       // throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    private <T> void pushToBottom(Deque<T> stack, T element) {
+
     }
 
     /**
