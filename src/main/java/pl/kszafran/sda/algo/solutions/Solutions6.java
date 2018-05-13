@@ -53,7 +53,7 @@ public class Solutions6 extends Exercises6 {
     @Override
     public <T> List<T> traversePreOrderIterative(SdaTree<T> tree) {
         List<T> visited = new ArrayList<>();
-        preOrderIterative(tree, visited::add);
+        preOrderIterative(tree, e -> visited.add(e));
         return visited;
     }
 
@@ -62,7 +62,7 @@ public class Solutions6 extends Exercises6 {
         while (!toVisit.isEmpty()) {
             SdaTree<T> node = toVisit.pop();
             visitor.accept(node.getValue());
-            node.getRightChild().ifPresent(toVisit::push);
+            node.getRightChild().ifPresent(e -> toVisit.push(e));
             node.getLeftChild().ifPresent(toVisit::push);
         }
     }
