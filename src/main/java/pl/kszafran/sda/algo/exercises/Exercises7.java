@@ -14,7 +14,16 @@ public class Exercises7 {
      * ma wartość większą lub równą wartości swoich dzieci.
      */
     public boolean isHeap(int[] array) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (int i = 0; i < array.length; i++) {
+            if (((2 * i) + 1 < array.length
+                    && array[2 * i + 1] > array[i])
+                    ||
+                    ((2 * i) + 2 < array.length
+                            && array[2 * i + 2] > array[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public <T extends Comparable<T>> SdaHeap<T> createHeap(T[] heap, int capacity) {
@@ -59,9 +68,28 @@ public class Exercises7 {
             this.size = heap.length;
         }
 
+
+        /*
+        A[A.length] = v
+        i = A.length-1
+        while (i > 1 && A[parent(i)] < A[i])
+        swap(A[i], A[parent(i)])
+        */
         @Override
         public void push(T element) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (size == heap.length) {
+                throw new IllegalStateException();
+            }
+            heap[size] = element;
+            size += 1;
+            int index = size - 1;
+            while (index > 0 && heap[index].compareTo(heap[(index - 1) / 2]) > 0) {
+                T swap = heap[index];
+                heap[index] = heap[(index - 1) / 2];
+                heap[(index - 1) / 2] = swap;
+                index=(index-1)/2;
+            }
+
         }
 
         @Override
@@ -87,7 +115,7 @@ public class Exercises7 {
 
         /**
          * Wstawia nowy element do drzewa BST.
-         *
+         * <p>
          * Jeśli element o takiej samej wartości już znajduje się w drzewie,
          * zostaje zastąpiony przez nowy element.
          */
@@ -95,22 +123,22 @@ public class Exercises7 {
 
         /**
          * Zwraca true, jeśli podany element znajduje się w drzewie.
-         *
+         * <p>
          * Uwaga: elementy należy porównywać poprzez .compareTo(..), nie .equals(..).
          */
         boolean contains(T element);
 
         /**
          * Usuwa element z drzewa BST (jeśli taki istnieje).
-         *
+         * <p>
          * Podpowiedź: należy rozpatrzyć trzy przypadki:
          * - usuwany węzeł nie ma dzieci
          * - usuwany węzeł ma jedno dziecko
          * - usuwany węzeł ma dwoje dzieci
-         *
+         * <p>
          * Uwaga: zauważ, że nasza implementacja Node nie przechowuje referencji na rodzica (parent),
          * więc nie każde rozwiazanie znalezione w Internecie się dla nas nadaje.
-         *
+         * <p>
          * Podpowiedź: ta stronka może się tutaj bardziej przydać niż Wikipedia:
          * https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
          */
